@@ -16,18 +16,10 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     mean2 = 0
     id1 = id[1]
     
+    file_list <- list.files()
   
     for (i in id){
-        fil = as.character(id1)
-        if(id1<10){
-            fil <- paste("00",fil,sep = "")
-        }
-        else if(id1>9 & id1<100){
-            fil <- paste("0",fil,sep="")
-        }
-        fname = paste(fil,"csv", sep = ".")
-        f <- read.csv(fname)
-        pollutant <- sprintf("%s",pollutant)
+        f <- read.csv(file_list[id1])
         bad <- is.na(f[[pollutant]])
         mean1 <- sum(f[[pollutant]][!bad])
         count = count + length((f[[pollutant]][!bad]))
